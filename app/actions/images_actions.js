@@ -9,5 +9,5 @@ export const receiveImages = images => (
 export const fetchImages = searchTerms => dispatch => {
   return API.fetchImages(searchTerms)
     .then(response => response.json())
-    .then(responseData => dispatch(receiveImages(responseData)))
+    .then(responseData => dispatch(receiveImages(responseData.hits)))
 };

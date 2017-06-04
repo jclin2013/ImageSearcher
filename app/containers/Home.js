@@ -13,6 +13,14 @@ class Home extends Component {
   }
 
   render() {
+
+    let imageList = this.props.images.map(image =>
+      <View key={image.id}>
+        <Image source={{uri: image.webformatURL}} style={{height: 300}} />
+        <Text>{image.tags}</Text>
+      </View>
+    )
+
     return (
       <View style={{marginTop: 20}}>
 
@@ -23,6 +31,7 @@ class Home extends Component {
         </View>
 
         <ScrollView>
+          {imageList}
         </ScrollView>
 
       </View>
