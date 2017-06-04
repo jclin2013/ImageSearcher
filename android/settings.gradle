@@ -1,0 +1,3 @@
+rootProject.name = 'ImageSearcher'
+
+include ':app'
