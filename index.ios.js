@@ -4,14 +4,9 @@ import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import rootReducer from './app/reducers/root_reducer';
-
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
-
+import AppContainer from './app/containers/AppContainer';
+import { AppRegistry } from 'react-native';
+import { StackNavigator } from 'react-navigation';
 
 const loggerMiddleware = createLogger({
   predicate: (getState, action) => __DEV__
@@ -29,19 +24,14 @@ function configureStore(initialState) {
 
 const store = configureStore({});
 
-class ImageSearcher extends Component {
-  render() {
-    return (
-      <View>
-        <Text>IMAGE SEARCHER IS WORKING</Text>
-      </View>
-    );
-  }
-}
+// StackNavigator({
+//   Home: { screen: Home },
+//   ImageIndex: { screen: ImageIndex },
+// });
 
 const App = () => (
   <Provider store={store}>
-    <ImageSearcher />
+    <AppContainer />
   </Provider>
 );
 
