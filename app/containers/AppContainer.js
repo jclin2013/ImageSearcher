@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchImages } from '../actions/images_actions';
+import { fetchImages, fetchMoreImages } from '../actions/images_actions';
 import Home from './Home';
 
 class AppContainer extends Component {
@@ -13,7 +13,8 @@ class AppContainer extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchImages: searchTerms => dispatch(fetchImages(searchTerms))
+    fetchImages: searchTerms => dispatch(fetchImages(searchTerms)),
+    fetchMoreImages: (searchTerms, pageNum) => dispatch(fetchMoreImages(searchTerms, pageNum))
   };
 }
 

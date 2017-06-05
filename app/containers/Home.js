@@ -10,7 +10,8 @@ class Home extends Component {
 
     this.searchPressed = this.searchPressed.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.state = {searchTerms: "", searching: false, dataSource: ds.cloneWithRows([])};
+    this.onEndReached = this.onEndReached.bind(this);
+    this.state = {searchTerms: "", pageNum: 1, searching: false, dataSource: ds.cloneWithRows([])};
 
   }
 
@@ -35,6 +36,17 @@ class Home extends Component {
           <Image source={{uri: image.webformatURL}} style={{height: 300}} />
         </View>
       )
+  }
+
+  onEndReached() {
+    this.setState({pageNum: this.state.pageNum + 1},
+      () => {
+              this.props.fetchMoreImages(this.state.searchTerms, this.state.pageNum)
+                .then(() => this.setState({
+                  dataSource: this.state.dataSource.cloneWithRows(this.props.images)
+                }));
+            }
+    )
   }
 
   render() {
@@ -65,6 +77,7 @@ class Home extends Component {
           dataSource={this.state.dataSource}
           renderRow={ image => this.renderImageRow(image) }
           enableEmptySections={true}
+          onEndReached={this.onEndReached}
         />}
 
       </View>
