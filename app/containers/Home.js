@@ -1,33 +1,43 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text, TextInput, Image, TouchableHighlight, StyleSheet, ActivityIndicator } from 'react-native';
+import { ListView, View, Text, TextInput, Image, TouchableHighlight, StyleSheet, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 
 class Home extends Component {
   constructor(props) {
     super(props);
+
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 != r2});
+
     this.searchPressed = this.searchPressed.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.state = {searchTerms: "", searching: false};
+    this.state = {searchTerms: "", searching: false, dataSource: ds.cloneWithRows([])};
+
   }
 
   searchPressed() {
     this.setState({searching: true});
+
     this.props.fetchImages(this.state.searchTerms)
-      .then(() => this.setState({searching: false}));
+      .then(() => this.setState({
+        searching: false,
+        dataSource: this.state.dataSource.cloneWithRows(this.props.images)
+      }));
   }
 
   handleChange(text) {
     this.setState({ searchTerms: text });
   }
 
+  renderImageRow(image) {
+      console.log('rendering!');
+      return (
+        <View key={image.id}>
+          <Image source={{uri: image.webformatURL}} style={{height: 300}} />
+        </View>
+      )
+  }
+
   render() {
-
-    let imageList = this.props.images.map(image =>
-      <View key={image.id}>
-        <Image source={{uri: image.webformatURL}} style={{height: 300}} />
-      </View>
-    )
-
     return (
       <View style={styles.scene}>
 
@@ -51,9 +61,11 @@ class Home extends Component {
             size="large"
           />}
 
-        <ScrollView style={styles.scrollSection}>
-          {!this.state.searching && imageList}
-        </ScrollView>
+        {!this.state.searching && <ListView
+          dataSource={this.state.dataSource}
+          renderRow={ image => this.renderImageRow(image) }
+          enableEmptySections={true}
+        />}
 
       </View>
     )
@@ -80,9 +92,6 @@ const styles = StyleSheet.create({
 
   searchButton: {
     flex: 0.15
-  },
-
-  scrollSection: {
   }
 
 })
