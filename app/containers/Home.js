@@ -11,12 +11,28 @@ class Home extends Component {
     this.searchPressed = this.searchPressed.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.onEndReached = this.onEndReached.bind(this);
-    this.state = {searchTerms: "", pageNum: 1, searching: false, dataSource: ds.cloneWithRows([])};
+
+    this.state = {
+      searchTerms: "",
+      pageNum: 1,
+      searching: false,
+      dataSource: ds.cloneWithRows([]),
+      initialLoadScreen: true
+    };
 
   }
 
+  initialLoadScreen() {
+    return (
+      <View style={styles.initialLoadScreen}>
+        <Text style={styles.welcomeMessage}>Welcome to ImageSearcher!</Text>
+        <Text>Type in a query and hit search to find some images.</Text>
+      </View>
+    )
+  }
+
   searchPressed() {
-    this.setState({searching: true});
+    this.setState({searching: true, initialLoadScreen: false});
 
     this.props.fetchImages(this.state.searchTerms)
       .then(() => this.setState({
@@ -39,12 +55,15 @@ class Home extends Component {
   }
 
   onEndReached() {
+    if (this.state.searchTerms === "") { return; }
+
     this.setState({pageNum: this.state.pageNum + 1},
       () => {
               this.props.fetchMoreImages(this.state.searchTerms, this.state.pageNum)
                 .then(() => this.setState({
-                  dataSource: this.state.dataSource.cloneWithRows(this.props.images)
-                }));
+                            dataSource: this.state.dataSource.cloneWithRows(this.props.images)
+                          })
+                    );
             }
     )
   }
@@ -62,14 +81,16 @@ class Home extends Component {
             value={ this.state.searchTerms.toLowerCase() }
           />
 
-          <TouchableHighlight style={styles.searchButton} onPress={ this.searchPressed }>
-            <Text>Search</Text>
+          <TouchableHighlight style={styles.searchButton} onPress={this.searchPressed}>
+            <Text style={{textAlign: 'center'}}>Search</Text>
           </TouchableHighlight>
         </View>
 
+        {this.state.initialLoadScreen && this.initialLoadScreen()}
+
         {this.state.searching && <ActivityIndicator
             animating={this.state.searching}
-            style={{height: 600}}
+            style={{height:'90%'}}
             size="large"
           />}
 
@@ -91,6 +112,17 @@ const styles = StyleSheet.create({
     marginTop: 20
   },
 
+  initialLoadScreen: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '90%',
+  },
+
+  welcomeMessage: {
+    fontSize: 25
+  },
+
   searchSection: {
     flexDirection: 'row',
     height: 30,
@@ -104,7 +136,9 @@ const styles = StyleSheet.create({
   },
 
   searchButton: {
-    flex: 0.15
+    flex: 0.15,
+    borderWidth: 0.5,
+    borderColor: 'lightgray'
   }
 
 })
