@@ -1,4 +1,4 @@
-import { RECEIVE_IMAGES, RECEIVE_MORE_IMAGES} from '../actions/images_actions';
+import { RECEIVE_IMAGES, RECEIVE_MORE_IMAGES} from '../actions/ImagesActions';
 
 export const imagesReducer = (state = [], action) => {
 

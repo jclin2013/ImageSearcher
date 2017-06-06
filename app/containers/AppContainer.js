@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchImages, fetchMoreImages } from '../actions/images_actions';
+import { fetchImages, fetchMoreImages } from '../actions/ImagesActions';
 import Home from '../components/Home';
 
 class AppContainer extends Component {
