@@ -8,12 +8,10 @@ class ImageDetailScreen extends Component {
 
   render() {
     const { params } = this.props.navigation.state;
-    debugger
-    // <Text>{params.testText}</Text>
 
     return (
       <View>
-        <Text>"HI THIS IS THE IMAGE DETAIL SCREEN"</Text>
+        <Image source={{uri: params.imageUrl}} style={{height: 300}} />
       </View>
     )
   }

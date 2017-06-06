@@ -12,7 +12,6 @@ import {
   StyleSheet,
   ActivityIndicator } from 'react-native';
 
-
 class Home extends Component {
   constructor(props) {
     super(props);
