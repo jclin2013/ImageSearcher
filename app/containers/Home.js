@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ListView, View, Text, TextInput, Image, TouchableHighlight, StyleSheet, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
+import { NavigationActions } from 'react-navigation';
 
 class Home extends Component {
   constructor(props) {
@@ -46,11 +47,25 @@ class Home extends Component {
   }
 
   renderImageRow(image) {
-      console.log('rendering!');
       return (
-        <View key={image.id}>
+        <TouchableHighlight
+          key={image.id}
+          onPress={() =>
+            this.props.dispatch(NavigationActions.navigate({
+              routeName: 'ImageDetailScreen',
+              params: {
+                imageUrl: image.webformatURL,
+                user: image.user,
+                tags: image.tags,
+                height: image.webformatHeight,
+                width: image.webformatWidth
+              }
+            }))}
+          >
+
           <Image source={{uri: image.webformatURL}} style={{height: 300}} />
-        </View>
+
+        </TouchableHighlight>
       )
   }
 
@@ -108,8 +123,7 @@ class Home extends Component {
 
 const styles = StyleSheet.create({
   scene: {
-    flex: 1,
-    marginTop: 20
+    flex: 1
   },
 
   initialLoadScreen: {

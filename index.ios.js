@@ -7,6 +7,7 @@ import rootReducer from './app/reducers/root_reducer';
 import AppContainer from './app/containers/AppContainer';
 import { AppRegistry } from 'react-native';
 import { StackNavigator } from 'react-navigation';
+import AppWithNavigationState from './app/navigators/AppNavigator';
 
 const loggerMiddleware = createLogger({
   predicate: (getState, action) => __DEV__
@@ -24,14 +25,9 @@ function configureStore(initialState) {
 
 const store = configureStore({});
 
-// StackNavigator({
-//   Home: { screen: Home },
-//   ImageIndex: { screen: ImageIndex },
-// });
-
 const App = () => (
   <Provider store={store}>
-    <AppContainer />
+    <AppWithNavigationState />
   </Provider>
 );
 

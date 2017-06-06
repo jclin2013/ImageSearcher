@@ -4,6 +4,10 @@ import { fetchImages, fetchMoreImages } from '../actions/images_actions';
 import Home from './Home';
 
 class AppContainer extends Component {
+  static navigationOptions = {
+    title: 'ImageSearcher'
+  };
+
   render() {
     return (
       <Home {...this.props} />
