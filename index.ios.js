@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
-import rootReducer from './app/reducers/root_reducer';
+import rootReducer from './app/reducers/RootReducer';
 import AppContainer from './app/containers/AppContainer';
 import { AppRegistry } from 'react-native';
 import { StackNavigator } from 'react-navigation';

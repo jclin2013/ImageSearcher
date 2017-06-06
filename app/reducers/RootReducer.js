@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import { imagesReducer } from './images_reducer';
-import { nav } from './navigator_reducer';
+import { imagesReducer } from './ImagesReducer';
+import { nav } from './NavigatorReducer';
 
 const rootReducer = combineReducers({
   images: imagesReducer,
