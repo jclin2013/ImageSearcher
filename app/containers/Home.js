@@ -67,8 +67,7 @@ class Home extends Component {
                 imageUrl: image.webformatURL,
                 user: image.user,
                 tags: image.tags,
-                height: image.webformatHeight,
-                width: image.webformatWidth
+                dimensions: `${image.webformatWidth} x ${image.webformatHeight}`
               }
             }))}
           >

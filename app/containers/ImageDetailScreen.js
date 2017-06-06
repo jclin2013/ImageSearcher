@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ListView, View, Text, TextInput, Image, TouchableHighlight, StyleSheet, ActivityIndicator } from 'react-native';
+import { ScrollView, View, Text, Image, StyleSheet } from 'react-native';
 
 class ImageDetailScreen extends Component {
   static navigationOptions = {
@@ -10,11 +10,21 @@ class ImageDetailScreen extends Component {
     const { params } = this.props.navigation.state;
 
     return (
-      <View>
+      <ScrollView>
         <Image source={{uri: params.imageUrl}} style={{height: 300}} />
-      </View>
+        <View style={{marginTop: 20}}>
+          <Text style={styles.photoInfo}>Photo Uploaded By: {params.user}</Text>
+          <Text style={styles.photoInfo}>Tags: {params.tags}</Text>
+          <Text style={styles.photoInfo}>Resolution: {params.dimensions}</Text>
+        </View>
+      </ScrollView>
     )
   }
 }
+const styles = StyleSheet.create({
+  photoInfo: {
+    fontSize: 20
+  }
+});
 
 export default ImageDetailScreen;
