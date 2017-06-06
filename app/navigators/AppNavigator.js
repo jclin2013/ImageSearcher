@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { addNavigationHelpers, StackNavigator } from 'react-navigation';
 
 import AppContainer from '../containers/AppContainer';
-import ImageDetailScreen from '../containers/ImageDetailScreen';
+import ImageDetailScreen from '../components/ImageDetailScreen';
 
 export const AppNavigator = StackNavigator({
   Home: { screen: AppContainer },

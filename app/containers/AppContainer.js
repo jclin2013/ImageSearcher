@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchImages, fetchMoreImages } from '../actions/images_actions';
-import Home from './Home';
+import Home from '../components/Home';
 
 class AppContainer extends Component {
   static navigationOptions = {
