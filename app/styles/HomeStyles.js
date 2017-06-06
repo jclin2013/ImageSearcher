@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 
 export const styles = StyleSheet.create({
   scene: {
@@ -18,10 +18,11 @@ export const styles = StyleSheet.create({
 
   searchSection: {
     flexDirection: 'row',
-    height: 30,
+    height: (Platform.OS === 'ios') ? 30 : 50,
     borderBottomColor: 'black',
     borderBottomWidth: 1,
-    padding: 5
+    padding: 5,
+    alignItems: 'center'
   },
 
   searchInput: {
