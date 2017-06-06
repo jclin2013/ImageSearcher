@@ -1,7 +1,17 @@
 import React, { Component } from 'react';
-import { ListView, View, Text, TextInput, Image, TouchableHighlight, StyleSheet, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
+import {
+  ListView,
+  View,
+  Text,
+  TextInput,
+  Image,
+  TouchableHighlight,
+  TouchableOpacity,
+  StyleSheet,
+  ActivityIndicator } from 'react-native';
+
 
 class Home extends Component {
   constructor(props) {
@@ -48,8 +58,9 @@ class Home extends Component {
 
   renderImageRow(image) {
       return (
-        <TouchableHighlight
+        <TouchableOpacity
           key={image.id}
+          style={styles.individualImage}
           onPress={() =>
             this.props.dispatch(NavigationActions.navigate({
               routeName: 'ImageDetailScreen',
@@ -65,7 +76,7 @@ class Home extends Component {
 
           <Image source={{uri: image.webformatURL}} style={{height: 300}} />
 
-        </TouchableHighlight>
+        </TouchableOpacity>
       )
   }
 
