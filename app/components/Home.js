@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
-import { styles } from './HomeStyles'
+import { styles } from '../styles/HomeStyles'
 import {
   ListView,
   View,
